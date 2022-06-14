@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>homework16</title>
+    <style>
+        body {
+            font-size: 25px;
+        }
+
+        table, th, td {
+            border: 1px solid;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="matrix"></table>
+    <script>
+        //Task 1
+
+        let arr = [1,2, [1.1,1.2,1.3] ,3];
+
+
+        const generateList = (array) => {
+            const ul = document.createElement('ul');
+
+             for (const item of array) {
+                const li = document.createElement('li');
+                li.textContent = item;
+                ul.append(li);
+
+                if (Array.isArray(item)) {
+                    li.textContent = '';
+                    li.append(generateList(item));
+                } 
+            };
+
+            return ul;
+        }
+        
+        const ulArr = generateList(arr);
+        const task2 = document.getElementById('matrix');
+
+        task2.before(ulArr);
+
+        //Task 2
+
+        function makeTable() {
+            let table = document.createDocumentFragment();
+            let arr = [];
+
+            for (let i = 0; i < 10; i++) {
+                let tr = document.createElement('tr');
+                arr[i] = [];
+
+                for (let j = 0; j < 10; j++) {
+                    let td = document.createElement('td');
+                    td.innerHTML = arr[i][j] = i * 10 + j + 1;
+                    tr.append(td);
+                }
+                table.append(tr);
+            }
+
+            document.getElementById('matrix').append(table);
+        }
+
+        makeTable();
+    </script>
+</body>
+</html>
